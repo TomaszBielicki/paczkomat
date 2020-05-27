@@ -1,4 +1,4 @@
 package com.example.demo.controllers;
 
-public class DeliveryRepo {
+public class DeliveryController {
 }

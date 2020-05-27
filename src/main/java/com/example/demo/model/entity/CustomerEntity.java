@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.entity;
 
 
 import lombok.Data;
@@ -16,5 +16,8 @@ public class CustomerEntity {
     private String name;
     private String surname;
     private String email;
+
+    @OneToOne
+    private DeliveryEntity deliveryEntity;
 
 }
