@@ -1,6 +1,7 @@
 package com.example.demo.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 public class CustomerEntity {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -17,6 +19,7 @@ public class CustomerEntity {
     private String surname;
     private String email;
 
+    @JsonIgnore
     @OneToOne
     private DeliveryEntity deliveryEntity;
 
