@@ -17,7 +17,7 @@ public class DeliveryEntity {
     private long id;
 
     private String deliveryId;
-    private String senderId;
+    private String customerId;
     private String adressedId;
     private String lockerId;
     private String status;

@@ -1,5 +1,6 @@
 package com.example.demo.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,9 @@ public class LockerEntity {
    @GeneratedValue (strategy = GenerationType.IDENTITY)
    private long id;
 
+   @JsonIgnore
    private String lockerId;
+
    private String city;
    private String space;
 
