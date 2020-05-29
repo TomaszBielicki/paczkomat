@@ -9,5 +9,5 @@ public interface LockerService {
 
     List<LockerEntity> getLocker();
     void addLocker (LockerRequest lockerRequest);
-   // void addPost (LockerEntity lockerEntity);
+
 }

@@ -2,13 +2,10 @@ package com.example.demo.controllers;
 
 import com.example.demo.model.customer.CustomerRequest;
 import com.example.demo.model.entity.CustomerEntity;
-import com.example.demo.model.locker.LockerRequest;
 import com.example.demo.services.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
