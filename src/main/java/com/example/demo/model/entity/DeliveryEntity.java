@@ -17,14 +17,10 @@ public class DeliveryEntity {
     private long id;
 
     private String deliveryId;
-    private String customerId;
     private String adressedId;
-    private String lockerId;
+    private String recieverId;
+    private String startLockerId;
+    private String endLockerId;
     private String status;
 
-    @ManyToOne
-    private LockerEntity lockerEntity;
-
-    @OneToOne
-    private CustomerEntity customerEntity;
 }

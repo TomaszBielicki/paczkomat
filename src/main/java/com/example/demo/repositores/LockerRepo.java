@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LockerRepo extends JpaRepository<LockerEntity, Long> {
+
+    LockerEntity findByLockerId(String lockerId);
 }
