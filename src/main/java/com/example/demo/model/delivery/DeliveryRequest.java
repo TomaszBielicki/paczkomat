@@ -7,9 +7,8 @@ import lombok.Setter;
 @Setter
 public class DeliveryRequest {
 
-    private String deliveryId;
     private String customerId;
-    private String adressedId;
-    private String lockerId;
-    private String status;
+    private String startLockerId;
+    private String endLockerId;
+    private String email;
 }

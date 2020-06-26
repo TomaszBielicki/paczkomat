@@ -21,7 +21,7 @@ public class LockerEntity {
    private String lockerId;
 
    private String city;
-   private String space;
+   private Integer space;
 
    @OneToMany
    private List<DeliveryEntity> deliveryEntity = new ArrayList<>();
