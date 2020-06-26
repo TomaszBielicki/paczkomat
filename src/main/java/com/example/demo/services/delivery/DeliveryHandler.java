@@ -11,12 +11,12 @@ import com.example.demo.repositores.LockerRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
 import java.util.UUID;
 
 @Component
 public class DeliveryHandler implements IDeliveryHandler {
+    private static final String PROGRESS = "PROGRESS";
 
     private DeliveryRepo deliveryRepo;
     private LockerRepo lockerRepo;
@@ -55,22 +55,21 @@ public class DeliveryHandler implements IDeliveryHandler {
         CustomerEntity receiver = customerRepo.findByEmail(deliveryRequest.getEmail());
         if (receiver == null) {
             receiver = new CustomerEntity();
-            receiver.setClientId("uuid3");
+            receiver.setClientId(UUID.randomUUID().toString());
             receiver.setEmail(deliveryRequest.getEmail());
             customerRepo.save(receiver);
         }
         return receiver;
-
     }
 
     private DeliveryResponse createDelivery(DeliveryRequest deliveryRequest, CustomerEntity receiver) {
         DeliveryEntity createDeliveryEntity = new DeliveryEntity();
-        createDeliveryEntity.setDeliveryId(UUID.randomUUID().toString());// generate
+        createDeliveryEntity.setDeliveryId(UUID.randomUUID().toString());
         createDeliveryEntity.setAdressedId(deliveryRequest.getCustomerId());
         createDeliveryEntity.setRecieverId(receiver.getClientId());
         createDeliveryEntity.setStartLockerId(deliveryRequest.getStartLockerId());
         createDeliveryEntity.setEndLockerId(deliveryRequest.getEndLockerId());
-        createDeliveryEntity.setStatus("PROGRESS");
+        createDeliveryEntity.setStatus(PROGRESS);
         deliveryRepo.save(createDeliveryEntity);
         return new ModelMapper().map(createDeliveryEntity, DeliveryResponse.class);
     }
