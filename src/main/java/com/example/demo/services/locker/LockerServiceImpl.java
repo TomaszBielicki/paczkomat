@@ -35,5 +35,8 @@ public class LockerServiceImpl implements LockerService {
         lockerRepo.save(lockerEntity);
     }
 
+    public void changeLockerSpace(){
+
+    }
 
 }

@@ -17,7 +17,6 @@ public class LockerEntity {
    @GeneratedValue (strategy = GenerationType.IDENTITY)
    private long id;
 
-   @JsonIgnore
    private String lockerId;
 
    private String city;
