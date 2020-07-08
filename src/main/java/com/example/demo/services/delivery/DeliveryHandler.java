@@ -9,14 +9,18 @@ import com.example.demo.repositores.CustomerRepo;
 import com.example.demo.repositores.DeliveryRepo;
 import com.example.demo.repositores.LockerRepo;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Component
 public class DeliveryHandler implements IDeliveryHandler {
-    private static final String PROGRESS = "PROGRESS";
+    private static final String PROGRESS = "WAITING";
+    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
     private DeliveryRepo deliveryRepo;
     private LockerRepo lockerRepo;
@@ -34,6 +38,8 @@ public class DeliveryHandler implements IDeliveryHandler {
     @Override
     public DeliveryResponse invoke(DeliveryRequest deliveryRequest) {
 
+        LOG.info("DeliveryRequest invoke start");
+
         if (lockValidator(deliveryRequest)) return null;
         CustomerEntity receiver = receiverValidator(deliveryRequest);
         DeliveryResponse deliveryResponse = createDelivery(deliveryRequest, receiver);
@@ -42,12 +48,19 @@ public class DeliveryHandler implements IDeliveryHandler {
         return deliveryResponse;
     }
 
+    @Override
+    public List<DeliveryEntity> getDeliveries() {
+        return deliveryRepo.findAll();
+    }
+
+
     private boolean lockValidator(DeliveryRequest deliveryRequest) {
         LockerEntity locker = lockerRepo.findByLockerId(deliveryRequest.getStartLockerId());
         if (!(locker.getSpace() > 0)) {
-            System.out.println("return error");
+            LOG.error("There is no space in Locker id: {}", locker.getId());
             return true;
         }
+        locker.setSpace(locker.getSpace() - 1);
         return false;
     }
 
